@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      <CriteriaFilter :dynamicText="parentDynamicText" @filterChanged="onFilterChanged" />
+      <input v-text="parentDynamicText" v-model="parentDynamicText" />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import CriteriaFilter from "./components/CriteriaFilter.vue";
 export default {
-  name: 'app',
+  name: "Reports",
   components: {
-    HelloWorld
+    CriteriaFilter
+  },
+  data() {
+    return {
+      parentDynamicText: "",
+      startDateSelected: new Date(),
+      endDateSelected: new Date()
+    };
+  },
+  methods: {
+    // onStartDateChanged(filterData) {
+    //   console.log(filterData);
+    // },
+    onFilterChanged(criteria) {
+      console.log("Filter changed to: ");
+      console.log(criteria);
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
